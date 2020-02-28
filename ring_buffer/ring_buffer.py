@@ -21,7 +21,6 @@ class RingBuffer:
         self.capacity = capacity
         self.current = None #where head of ring is currently located
         self.storage = DoublyLinkedList()
-        self.length = self.storage.length
 
     def append(self, item):
         #if storage is 0, initiate ring
@@ -68,13 +67,24 @@ class RingBuffer:
 
 class ArrayRingBuffer:
     def __init__(self, capacity):
-        pass
+        self.capacity = capacity
+        #start of an array is index 0 
+        self.current = 0
+        #creates an array len of capacity filled with None
+        self.storage = [None] * capacity
 
     def append(self, item):
-        pass
+        #add item to the current index
+        self.storage[self.current] = item 
+        #increment current index
+        self.current +=1
+        #If index is at capacity, move back to start of array by setting current to 0
+        if self.current == self.capacity:
+            self.current= 0
 
     def get(self):
-        pass
+        #use list comprehension to return list if i is not None
+        return [i for i in self.storage if i is not None]
 
 # buffer = RingBuffer(3)
 # print("Print Buffer get() ---> ", buffer.get())        # []
