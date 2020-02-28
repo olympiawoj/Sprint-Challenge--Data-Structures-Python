@@ -1,4 +1,5 @@
 import time
+from binary_search_tree import BinarySearchTree
 
 start_time = time.time()
 
@@ -13,10 +14,37 @@ f.close()
 duplicates = []  # Return the list of duplicates in this data structure
 
 # Replace the nested for loops below with your improvements
-for name_1 in names_1:
-    for name_2 in names_2:
-        if name_1 == name_2:
-            duplicates.append(name_1)
+#ORIGINAL SOLUTION
+# for name_1 in names_1:
+#     for name_2 in names_2:
+#         if name_1 == name_2:
+#             duplicates.append(name_1)
+
+"""
+How can this be improved
+1.  Don't use nested for loops
+2.  Use a binary tree to quickly find duplicates
+
+Binary search must have a) sorted data and b) at most 2 children
+
+- Every node to the left of a parent node is **always less** than the parent
+- Every node to the right of a parent node is **always greater** than the parent
+
+"""
+
+def find_duplicates(names_1, names_2):
+    duplicates = [] 
+    #init BST
+    bst = BinarySearchTree("")
+    #for each name in first list, insert
+    for name_1 in set_1:
+        bst.insert(name_1)
+    #for each name in second list, check and insert into dupes
+    for name_2 in set_2:
+        if bst.contains(name_2):
+            duplicates.append(name_2)
+    return duplicates
+
 
 end_time = time.time()
 print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
