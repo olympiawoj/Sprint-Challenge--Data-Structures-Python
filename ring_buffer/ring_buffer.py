@@ -21,12 +21,9 @@ class RingBuffer:
         self.capacity = capacity
         self.current = None #where head of ring is currently located
         self.storage = DoublyLinkedList()
-    
-    def append(self, item):
-        # print('current', self.current)
-        # print('capacity', self.capacity)
-        # print('storage', self.storage)
+        self.length = self.storage.length
 
+    def append(self, item):
         #if storage is 0, initiate ring
         if self.storage.length == 0:
             self.storage.add_to_head(item)
@@ -79,21 +76,25 @@ class ArrayRingBuffer:
     def get(self):
         pass
 
-buffer = RingBuffer(3)
+# buffer = RingBuffer(3)
 # print("Print Buffer get() ---> ", buffer.get())        # []
-buffer.append('a')
-# # print("Print Buffer get() ---> ", buffer.get())        # 1 ['a']
-buffer.append('b')
-# # print("Print Buffer get() ---> ", buffer.get())        # 2 ['a', 'b']
+# buffer.append('a')
+
+# print("Print Buffer get() ---> ", buffer.get())        # 1 ['a']
+# buffer.append('b')
+# print("Print Buffer get() ---> ", buffer.get())        # 2 ['a', 'b']
 # buffer.append('c')
-# # print("Print Buffer get() ---> ", buffer.get())        # should return ['a', 'b', 'c']
+# print("Print Buffer get() ---> ", buffer.get())        # should return ['a', 'b', 'c']
 # # 'd' overwrites the oldest value in the ring buffer, which is 'a'
 # buffer.append('d')
-# # print("Print Buffer get() ---> ", buffer.get())        # should return ['d', 'b', 'c']
+# print("Print Buffer get() ---> ", buffer.get())        # should return ['d', 'b', 'c']
 # buffer.append('e')
-# # print("Print Buffer get() ---> ", buffer.get())        # should return ['d', 'e', 'c']
+# print("Print Buffer get() ---> ", buffer.get())        # should return ['d', 'e', 'c']
 # buffer.append('f')
-# buffer.append('g')
-# buffer.append('h')
-# buffer.append('i')
 # print("Print Buffer get() ---> ", buffer.get())        # should return ['d', 'e', 'f']
+# buffer.append('g')
+# print("Print Buffer get() ---> ", buffer.get())        # should return ['g', 'e', 'f']
+# buffer.append('h')
+# print("Print Buffer get() ---> ", buffer.get())        # should return ['g', 'h', 'f']
+# buffer.append('i')
+# print("Print Buffer get() ---> ", buffer.get())        # should return ['g', 'h', 'i']
